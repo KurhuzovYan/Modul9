@@ -40,26 +40,7 @@ public class MyArrayList<E> {
 
     @Override
     public String toString() {
-        return "MyArrayList: " + Arrays.toString(myArray) ;
+        return "MyArrayList: " + Arrays.toString(myArray);
     }
 
-    public static void main(String[] args) {
-        MyArrayList<String> listStr = new MyArrayList<String>();
-        MyArrayList<Integer> listInt = new MyArrayList<Integer>();
-        listStr.add("Hello");
-        listInt.add(10);
-        System.out.println(listStr);
-        listStr.add("World");
-        listStr.remote(1);
-        System.out.println(listStr);
-        System.out.println(listStr.size());
-        listStr.clear();
-        System.out.println(listStr.size());
-        listStr.add("Hi");
-        listInt.add(2);
-        listStr.add("World!");
-        listInt.get(1);
-        System.out.println(listStr);
-        System.out.println(listInt);
-    }
 }
