@@ -1,12 +1,12 @@
 import java.util.Arrays;
 
-public class MyArrayList {
+public class MyArrayList<E> {
     private Object[] myArray = new Object[0];
     private int indexOfElement = 0;
 
-    public void add(Object o) {
+    public void add(E element) {
         myArray = Arrays.copyOf(myArray, myArray.length + 1);
-        myArray[indexOfElement] = o;
+        myArray[indexOfElement] = element;
         indexOfElement++;
     }
 
@@ -44,21 +44,22 @@ public class MyArrayList {
     }
 
     public static void main(String[] args) {
-        MyArrayList listStr = new MyArrayList();
+        MyArrayList<String> listStr = new MyArrayList<String>();
+        MyArrayList<Integer> listInt = new MyArrayList<Integer>();
         listStr.add("Hello");
-        listStr.add(10);
-        listStr.add('a');
-        System.out.println(listStr);
-        listStr.remote(1);
+        listInt.add(10);
         System.out.println(listStr);
         listStr.add("World");
+        listStr.remote(1);
         System.out.println(listStr);
         System.out.println(listStr.size());
         listStr.clear();
         System.out.println(listStr.size());
         listStr.add("Hi");
-        listStr.add(2);
+        listInt.add(2);
         listStr.add("World!");
-        listStr.get(2);
+        listInt.get(1);
+        System.out.println(listStr);
+        System.out.println(listInt);
     }
 }
