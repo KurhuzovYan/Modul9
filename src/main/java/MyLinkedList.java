@@ -81,6 +81,7 @@ public class MyLinkedList<E> {
 
     @Override
     public String toString() {
+        if(first == null) return null;
         String elements = "";
         for (Node<E> i = first; i != null; i = i.nextElement) {
             if (i.element != null) {
