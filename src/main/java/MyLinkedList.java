@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 public class MyLinkedList<E> {
 
     private Node<E> first;
     private Node<E> last;
-    private int size = 0;
+    private int size;
 
     public void add(E element) {
         Node<E> newNode = new Node<>(element);
@@ -75,20 +77,22 @@ public class MyLinkedList<E> {
     }
 
     public E get(int index) {
-        return getNodeByIndex(index).element;
+        return (E) ("Element by index " + index + " -> " + getNodeByIndex(index).element);
     }
 
 
     @Override
     public String toString() {
-        if(first == null) return null;
-        String elements = "";
+        if (first == null) return Arrays.toString(new Object[0]);
+        Object[] elements = new Object[size];
+        int index = 0;
         for (Node<E> i = first; i != null; i = i.nextElement) {
             if (i.element != null) {
-                elements += i.element + ", ";
+                elements[index] = i.element;
+                index++;
             }
         }
-        return elements.substring(0, elements.length() - 2);
+        return Arrays.toString(elements);
     }
 
 
@@ -97,10 +101,6 @@ public class MyLinkedList<E> {
         private E element;
         private Node<E> prevElement;
         private Node<E> nextElement;
-
-        public Node<E> getNextElement() {
-            return nextElement;
-        }
 
         public Node(E element) {
             this.element = element;

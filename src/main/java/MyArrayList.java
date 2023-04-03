@@ -1,20 +1,23 @@
 import java.util.Arrays;
 
 public class MyArrayList<E> {
-    private Object[] myArray = new Object[0];
-    private int size = 0;
+
+    private static final int DEFAULT_CAPACITY = 10;
+    private int size;
+    private Object[] myArray = new Object[size];
 
     public void add(E element) {
-        myArray = Arrays.copyOf(myArray, myArray.length + 1);
+        if (myArray.length == size) {
+            Object[] newArray = new Object[myArray.length + DEFAULT_CAPACITY];
+            System.arraycopy(myArray, 0, newArray, 0, size);
+            myArray = newArray;
+        }
         myArray[size] = element;
         size++;
     }
 
     public void remove(int index) {
-        Object[] myArrayNew = new Object[myArray.length - 1];
-        System.arraycopy(myArray, 0, myArrayNew, 0, index);
-        System.arraycopy(myArray, index + 1, myArrayNew, index, myArray.length - index - 1);
-        myArray = myArrayNew;
+        System.arraycopy(myArray, index + 1, myArray, index, myArray.length - index - 1);
         size--;
     }
 
@@ -32,12 +35,20 @@ public class MyArrayList<E> {
         for (int i = 0; i <= index; i++) {
             element = (E) myArray[i];
         }
-        return element;
+        return (E) ("Element by index " + index + " -> " + element);
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(myArray);
+        Object[] elementWithoutNull = new Object[size];
+        int i = 0;
+        for (Object el : myArray) {
+            if (el != null) {
+                elementWithoutNull[i] = el;
+                i++;
+            }
+        }
+        return Arrays.toString(elementWithoutNull);
     }
 
 }
