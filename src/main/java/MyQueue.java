@@ -23,8 +23,12 @@ public class MyQueue<E> {
 
     public E poll() {
         Node<E> elementToRemove = first;
-        first = first.nextElement;
-        first.prevElement = null;
+        if (size > 1) {
+            first = first.nextElement;
+            first.prevElement = null;
+        } else {
+            first = last = null;
+        }
         size--;
         return (E) elementToRemove.element;
     }

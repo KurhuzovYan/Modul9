@@ -19,14 +19,6 @@ public class MyStack<E> {
     }
 
     public E remove(int index) {
-        return unlink(index);
-    }
-
-    public int size() {
-        return size;
-    }
-
-    E unlink(int index) {
         Node<E> x = getNodeByIndex(index);
 
         final E element = x.element;
@@ -34,20 +26,48 @@ public class MyStack<E> {
         final Node<E> prev = x.prevElement;
 
         if (index == 0) {
-            first = first.nextElement;
-            first.prevElement = null;
+            if (size > 1) {
+                first = first.nextElement;
+                first.prevElement = null;
+            } else {
+                first = last = null;
+            }
         } else if (index == size - 1) {
             last = last.prevElement;
             last.nextElement = null;
         } else {
             prev.nextElement = next;
             next.prevElement = prev;
-//            x.prevElement = null;
-//            x.nextElement = null;
         }
         size--;
         return element;
     }
+
+    public void clear() {
+        first = last = null;
+        size = 0;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public E peek() {
+        return (E) last.element;
+    }
+
+    public E pop() {
+        Node<E> lastToRemove = last;
+        if (size > 1) {
+            last = last.prevElement;
+            last.nextElement = null;
+        } else {
+            first = last = null;
+        }
+        size--;
+        return (E) lastToRemove.element;
+    }
+
 
     private Node<E> getNodeByIndex(int index) {
         Node<E> currentToRemove = first;
