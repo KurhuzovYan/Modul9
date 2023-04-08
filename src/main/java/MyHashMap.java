@@ -87,24 +87,18 @@ public class MyHashMap<K, V> {
     }
 
     public V get(K key) {
-        Node<K, V> currentNode = table[0];
+        Node<K, V> currentNode = null;
         for (int i = 0; i < table.length; i++) {
-            Node<K, V> firstBucket = table[i];
-            if (firstBucket != null) {
-                if (firstBucket.next == null) {
-                    if ((firstBucket.hash == hash(key)) && ((firstBucket.key == key) || (key != null) && (key.equals(firstBucket.key)))) {
-                        currentNode = firstBucket;
-                    }
-                } else {
-                    for (Node<K, V> x = firstBucket; x != null; x = x.next) {
-                        if ((x.hash == hash(key)) && ((x.key == key) || (key != null) && (key.equals(x.key)))) {
-                            currentNode = x;
-                        }
+            if (table[i] != null) {
+                for (Node<K, V> x = table[i]; x != null; x = x.next) {
+                    if ((x.hash == hash(key)) && ((x.key == key) || (key != null) && (key.equals(x.key)))) {
+                        currentNode = x;
+                        break;
                     }
                 }
             }
         }
-        return (V) ("Key - " + key + ", Value -> " + currentNode.value);
+        return (currentNode != null) ? currentNode.value : null;
     }
 
     @Override

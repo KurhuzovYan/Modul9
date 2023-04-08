@@ -77,7 +77,7 @@ public class MyLinkedList<E> {
     }
 
     public E get(int index) {
-        return (E) ("Element by index " + index + " -> " + getNodeByIndex(index).element);
+        return getNodeByIndex(index).element;
     }
 
 

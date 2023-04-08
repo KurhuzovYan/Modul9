@@ -35,7 +35,7 @@ public class MyArrayList<E> {
         for (int i = 0; i <= index; i++) {
             element = (E) myArray[i];
         }
-        return (E) ("Element by index " + index + " -> " + element);
+        return element;
     }
 
     @Override
